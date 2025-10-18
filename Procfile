@@ -1,1 +1,1 @@
-web: gunicorn app:app --chdir . --preload --workers=2 --threads=4 --timeout=120
+web: gunicorn app.app:app
