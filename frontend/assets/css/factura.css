@@ -1,0 +1,46 @@
+/* ----------- Recibo/Factura BONITO (NO fiscal) ----------- */
+:root{
+  --ink:#0b1220;
+  --muted:#6b7280;
+}
+
+*{ box-sizing:border-box; }
+html,body{
+  margin:0; padding:24px;
+  font:14px/1.4 Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+}
+
+.invoice{ max-width:840px; margin:0 auto; }
+.head{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-bottom:12px;
+}
+.brand{ display:flex; align-items:center; gap:12px; }
+.brand img{ height:56px; }
+.brand h1{ margin:0; font-size:22px; }
+.meta{ color:var(--muted); font-size:12px; }
+
+.hr{ height:1px; background:#e5e7eb; margin:10px 0 16px; }
+
+table{ width:100%; border-collapse:collapse; margin-top:6px; }
+th,td{ padding:10px; border-bottom:1px solid #e5e7eb; text-align:left; }
+th{ text-transform:uppercase; font-size:12px; color:#6b7280; }
+td.num{ text-align:right; }
+
+.totals{ margin-top:10px; display:flex; justify-content:flex-end; }
+.totals .box{
+  min-width:260px; border:1px solid #e5e7eb; border-radius:8px; padding:10px;
+}
+.totals .row{ display:flex; justify-content:space-between; margin:6px 0; }
+
+.foot{ margin-top:14px; color:#374151; font-size:12px; }
+.badge{
+  display:inline-block; padding:4px 8px; border-radius:9999px;
+  background:#eef2ff; color:#3730a3; font-weight:600; font-size:12px;
+}
+
+@media print{
+  @page { size:auto; margin:10mm; }
+  .no-print{ display:none !important; }
+}

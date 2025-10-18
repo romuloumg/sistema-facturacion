@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recibo (No fiscal)</title>
+  <link rel="stylesheet" href="./assets/css/factura.css">
+</head>
+<body>
+  <div class="invoice">
+    <div class="head">
+      <div class="brand">
+        <img src="./assets/img/logo-recibo.png" alt="Logo" onerror="this.style.display='none'">
+        <div>
+          <h1>Sistema de Facturación</h1>
+          <div class="meta">Documento NO fiscal · Sin IVA</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div><b>Fecha:</b> <span id="fc-fecha">—</span></div>
+        <div><b>Vendedor:</b> <span id="fc-vendedor">—</span></div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <b>Cliente:</b> <span id="fc-cliente">—</span>
+      <span id="fc-tel-wrap"></span>
+      <span id="fc-email-wrap"></span>
+      <span id="fc-pago-wrap"></span>
+    </div>
+
+    <div class="hr"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descripción</th>
+          <th class="num">Precio</th>
+          <th class="num">Cant.</th>
+          <th class="num">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="fc-items"></tbody>
+    </table>
+
+    <div class="totals">
+      <div class="box">
+        <div class="row">
+          <div><b>Total del recibo</b></div>
+          <div><b id="fc-total">Q0.00</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="badge">No válido para crédito fiscal</span>
+      <span class="no-print" style="margin-left:8px">
+        · <a href="#" onclick="window.print();return false;">Imprimir</a>
+      </span>
+    </div>
+  </div>
+
+  <script type="module" src="./assets/js/factura.js"></script>
+</body>
+</html>

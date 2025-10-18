@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login · Sistema de Facturación</title>
+  <link rel="stylesheet" href="assets/css/base.css?v=1">
+  <link rel="stylesheet" href="assets/css/login.css">
+
+</head>
+<body class="login">
+  <main class="login-wrap">
+    <h1>Inicia sesión</h1>
+    <form id="loginForm">
+      <input id="usuario" placeholder="Usuario" autocomplete="username">
+      <input id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
+      <button type="submit">Ingresar</button>
+    </form>
+    <div id="login-msg"></div>
+  </main>
+
+<!-- al final de index.html -->
+<script type="module" src="assets/js/core/theme.js"></script>
+<script type="module" src="assets/js/login.js"></script>
+
+</body>
+</html>

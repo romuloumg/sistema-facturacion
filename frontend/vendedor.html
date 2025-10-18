@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel Vendedor</title>
+
+  <!-- Estilos del panel -->
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/vendedor.css">
+  <!-- NO cargar factura.css aquí -->
+</head>
+<body>
+  <header class="topbar">
+    <h1>Vendedor</h1>
+    <nav class="actions">
+      <button id="logout" class="btn btn-secondary">Salir</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="msg"></section>
+
+    <!-- Encabezado (datos del recibo/factura) -->
+    <section class="card" style="margin-bottom:1.25rem">
+      <div class="card-head"><h2>Nueva venta</h2></div>
+      <div class="table-wrap" style="padding:1rem">
+        <div class="row" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem">
+          <div>
+            <label>Cliente</label>
+            <input id="cliNombre" class="form-control" placeholder="Nombre del cliente">
+          </div>
+          <div>
+            <label>Teléfono</label>
+            <input id="cliTel" class="form-control" placeholder="Teléfono">
+          </div>
+          <div>
+            <label>Email</label>
+            <input id="cliEmail" class="form-control" type="email" placeholder="correo@dominio.com">
+          </div>
+          <div>
+            <label>Pago</label>
+            <select id="formaPago" class="form-control">
+              <option>Efectivo</option>
+              <option>Tarjeta</option>
+              <option>Transferencia</option>
+              <option>Cheque</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem;margin-top:.75rem">
+          <div>
+            <label>Vendedor</label>
+            <input id="vendedorNombre" class="form-control" value="vendedor1" disabled>
+          </div>
+          <div>
+            <label>Fecha</label>
+            <input id="fechaVenta" class="form-control" type="date">
+          </div>
+          <div></div>
+          <!-- Eliminado botón extra con id duplicado -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="card">
+      <div class="card-head"><h2>Catálogo</h2></div>
+
+      <div class="table-wrap">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Producto</th>
+              <th class="text-end">Precio</th>
+              <th class="text-end">Stock</th>
+              <th class="text-end" style="width:120px">Cantidad</th>
+              <th class="text-end">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-productos"></tbody>
+        </table>
+      </div>
+
+      <div class="footer-bar" style="display:flex;justify-content:space-between;align-items:center;gap:.75rem">
+        <div>
+          <div style="font-size:1.1rem">
+            <strong>Total del recibo:</strong> <span id="total">Q0.00</span>
+          </div>
+          <small class="badge">Documento no fiscal · Sin IVA</small>
+        </div>
+
+        <div style="display:flex;gap:.5rem">
+          <button id="btnImprimirRecibo"  class="btn btn-outline-primary">Imprimir recibo</button>
+          <button id="btnImprimirFactura" class="btn btn-secondary">Imprimir (diseño)</button>
+          <button id="btnVender"          class="btn">Registrar Venta</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Historial de ventas -->
+<section class="card" id="historial-card" style="margin-top:1.25rem">
+  <div class="card-head" style="display:flex;justify-content:space-between;align-items:center">
+    <h2>Historial de ventas</h2>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <select id="histPreset" class="form-control" style="width:160px">
+        <option value="hoy" selected>Hoy</option>
+        <option value="semana">Semana</option>
+        <option value="mes">Mes</option>
+        <option value="año">Año</option>
+      </select>
+      <button id="histRefresh" class="btn btn-secondary btn-sm">Actualizar</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Vendedor</th>
+          <th class="text-end">Total</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-historial">
+        <tr><td colspan="3" class="text-center muted">Cargando…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-bar">
+    <span id="hist-resumen">Tickets: 0 · Total: Q0.00</span>
+  </div>
+</section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Sesión forzada para pruebas -->
+  <script>
+    if (!localStorage.getItem('userId'))  localStorage.setItem('userId','18');
+    if (!localStorage.getItem('userRole')) localStorage.setItem('userRole','vendedor');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('logout')?.addEventListener('click', () => {
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userId');
+        location.href = './index.html';
+      });
+    });
+  </script>
+
+  <!-- Solo sales.js (él ya importa api.js) -->
+  <script type="module" src="./assets/js/sales.js"></script>
+  <!-- NO cargar factura.js aquí -->
+</body>
+</html>

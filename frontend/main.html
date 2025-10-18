@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sistema de Facturación</title>
+
+  <!-- Fuentes + Bootstrap + Iconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Tus CSS -->
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/sales.css?v=2">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <div class="brand-logo">SF</div>
+        <div>
+          <h1 class="app-title mb-0">Sistema de Facturación</h1>
+          <p class="app-subtitle mb-0">Baterías · Ventas e inventario</p>
+        </div>
+      </div>
+      <button id="themeToggle" class="btn btn-outline-light btn-sm rounded-pill px-3">
+        <i class="bi bi-moon-stars"></i> Tema
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenido -->
+  <main class="container py-4">
+    <div class="sf-card">
+      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3">
+        <h2 class="section-title mb-0">Venta actual</h2>
+        <div class="d-flex align-items-center gap-3">
+          <span id="total" class="total-display">Total: Q0.00</span>
+          <button id="btnVender" class="btn btn-success btn-lg shadow-sm">
+            <i class="bi bi-receipt-cutoff me-2"></i> Generar Venta
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle sf-table">
+          <thead>
+            <tr>
+              <th style="width:80px">ID</th>
+              <th>Producto</th>
+              <th class="text-end" style="width:140px">Precio</th>
+              <th class="text-center" style="width:150px">Cantidad</th>
+              <th class="text-end" style="width:140px">Stock</th>
+              <th class="text-end" style="width:160px">Nuevo stock</th>
+              <th class="text-end" style="width:140px">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-productos"></tbody>
+        </table>
+      </div>
+
+      <div id="msg" class="mt-3"></div>
+    </div>
+
+    <div id="toast" class="sf-toast" aria-live="polite" aria-atomic="true"></div>
+  </main>
+
+  <!-- JS: módulos separados (NO inline dentro del mismo script con src) -->
+  <script type="module" src="assets/js/core/theme.js"></script>
+  <script type="module" src="assets/js/core/ui.js"></script>
+  <script type="module" src="assets/js/core/api.js"></script>
+  <script type="module" src="assets/js/sales.js"></script>
+</body>
+
+</html>

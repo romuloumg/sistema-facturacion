@@ -1,0 +1,167 @@
+/* vendedor.css */
+
+.container {
+  max-width: 1100px;
+  margin: 16px auto;
+  padding: 0 12px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #2c3e50;
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.actions .btn {
+  margin-left: 8px;
+}
+
+.card {
+  background: #111827;
+  border: 1px solid #243244;
+  border-radius: 14px;
+  padding: 14px;
+  color: #e5e7eb;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.table-wrap {
+  overflow: auto;
+  max-height: 60vh;
+  border: 1px solid #223047;
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #213047;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #0b1220;
+  z-index: 1;
+}
+
+.text-end { text-align: right; }
+
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #213047;
+  font-weight: 700;
+}
+
+.toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  max-width: 320px;
+  z-index: 9999;
+}
+
+
+:root{
+  --bg:#0f172a;         /* azul oscuro */
+  --panel:#0b1223;      /* panel */
+  --panel-2:#111a32;    /* panel variante */
+  --text:#e5e7eb;       /* texto */
+  --muted:#9aa3b2;      /* texto tenue */
+  --primary:#22c55e;    /* verde acción */
+  --primary-2:#16a34a;
+  --border:#1f2a44;
+  --danger:#ef4444;
+  --warn:#f59e0b;
+}
+
+body{ background:#0b1220; color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; }
+
+.topbar{
+  background:var(--bg);
+  padding:1rem 1.25rem;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.topbar h1{ font-size:2rem; margin:0; font-weight:700; }
+
+.container{ max-width:1100px; margin:1.25rem auto; padding:0 1rem; }
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+.card-head{
+  padding:.9rem 1.1rem;
+  background:linear-gradient(180deg, var(--panel-2), var(--panel));
+  border-bottom:1px solid var(--border);
+}
+.card-head h2{ margin:0; font-size:1.35rem; }
+
+.table-wrap{ width:100%; overflow:auto; }
+.table{ width:100%; border-collapse:separate; border-spacing:0; }
+.table th, .table td{
+  padding:.8rem .9rem; border-bottom:1px solid var(--border);
+}
+.table thead th{
+  color:var(--muted); font-weight:600; background:rgba(255,255,255,.02);
+}
+.table tr:hover td{ background:rgba(255,255,255,.02); }
+
+.text-end{ text-align:right; }
+
+.footer-bar{
+  border-top:1px solid var(--border);
+  padding: .9rem 1rem;
+  display:flex; gap:1rem; align-items:center; justify-content:space-between;
+}
+.footer-bar strong{ font-weight:700; }
+
+.form-control{
+  width:100%; background:#0b1328; color:var(--text);
+  border:1px solid var(--border); border-radius:8px;
+  padding:.45rem .6rem; outline:none;
+}
+.form-control:focus{ border-color:#2b3e6b; box-shadow:0 0 0 2px rgba(59,130,246,.25); }
+
+.btn{
+  padding:.5rem .9rem; border-radius:10px; border:1px solid transparent;
+  cursor:pointer; color:#fff; background:var(--primary);
+}
+.btn:hover{ background:var(--primary-2); }
+.btn-outline-primary{
+  background:transparent; border-color:#2b3e6b; color:#cfe3ff;
+}
+.btn-outline-primary:hover{
+  background:#183159;
+}
+
+.alert{ margin: .9rem 0; padding:.75rem 1rem; border-radius:10px; }
+.alert-success{ background:#083d23; border:1px solid #0f6d3d; color:#c8f5df; }
+.alert-danger{ background:#3a0d10; border:1px solid #7f1d1d; color:#ffd1d4; }
+.alert-warning{ background:#3b2d05; border:1px solid #8a6c0b; color:#ffe8b3; }
+.alert-info{ background:#0d223d; border:1px solid #274b7c; color:#cfe3ff; }
+
+.badge{ display:inline-block; padding:.25rem .5rem; border-radius:9999px; background:#1f2937; color:#cbd5e1; font-size:.8rem; }
