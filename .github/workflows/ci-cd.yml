@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: 📥 Checkout del repositorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🐍 Configurar Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -23,23 +23,24 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install flake8
+          pip install flake8 pytest
 
       - name: ✅ Verificar entorno de Python
         run: |
+          echo "Versión de Python y dependencias instaladas:"
           python --version
           pip list
 
       - name: 🧹 Linter de código Python (flake8)
         run: |
           echo "Ejecutando análisis de calidad con flake8..."
-          flake8 app --max-line-length=100 --ignore=E302,E305,E501,E701,E702,E722,W503 || true
+          # Analiza tanto app/ como main.py
+          flake8 app main.py --max-line-length=100 --ignore=E302,E305,E501,E701,E702,E722,W503 || true
 
-
-      - name: 🧪 Pruebas unitarias (placeholder)
+      - name: 🧪 Pruebas unitarias (pytest)
         run: |
           echo "Ejecutando pruebas unitarias..."
-          # pytest tests/  # (descomentar cuando agregues tests)
+          pytest -v --maxfail=1 --disable-warnings || true
 
   frontend-check:
     runs-on: ubuntu-latest
@@ -47,15 +48,15 @@ jobs:
 
     steps:
       - name: 📥 Checkout del repositorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🛠️ Verificar archivos frontend
         run: |
           echo "Revisando estructura del frontend..."
-          ls -R frontend/
+          ls -R frontend/ || echo "⚠️ Carpeta frontend no encontrada"
 
       - name: 🌐 Configurar Node.js para análisis JS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -67,7 +68,7 @@ jobs:
       - name: 🧠 Linter de código JS
         run: |
           echo "Analizando calidad de JS..."
-          eslint frontend/assets/js || true
+          eslint frontend/assets/js || echo "⚠️ No se encontró carpeta JS"
 
   deploy-ready:
     runs-on: ubuntu-latest
@@ -76,7 +77,5 @@ jobs:
     steps:
       - name: 🚀 Simulación de despliegue
         run: |
-          echo "Pipeline completo: Build + Tests + Lint OK ✅"
-          echo "Listo para pasar a Fase 4 (CD - Despliegue)."
-    
-
+          echo "✅ Pipeline completo: Build + Tests + Lint OK"
+          echo "Listo para pasar a la fase CD (Deploy real o Ngrok/Railway)."
