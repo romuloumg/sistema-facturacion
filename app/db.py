@@ -1,4 +1,5 @@
 # app/db.py
+import os
 import mysql.connector
 from mysql.connector import pooling
 from .config import Config
