@@ -1,5 +1,6 @@
 flask
 flask-cors
+flask-restful
 python-dotenv
 mysql-connector-python
 gunicorn
