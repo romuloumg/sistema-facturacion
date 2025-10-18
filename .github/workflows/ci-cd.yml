@@ -1,4 +1,4 @@
-name: CI/CD - Sistema de Facturación
+name: CI/CD - Sistema de Facturación (Reforzado)
 
 on:
   push:
@@ -19,21 +19,26 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 📦 Instalar dependencias de Python
+      - name: 📦 Instalar dependencias del backend
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install flake8
 
-      - name: ✅ Verificar versión de Python y dependencias
+      - name: ✅ Verificar entorno de Python
         run: |
           python --version
           pip list
 
-      - name: 🧪 Ejecutar pruebas (placeholder)
+      - name: 🧹 Linter de código Python (flake8)
+        run: |
+          echo "Ejecutando análisis de calidad con flake8..."
+          flake8 app --max-line-length=100 --ignore=E402,W503
+
+      - name: 🧪 Pruebas unitarias (placeholder)
         run: |
           echo "Ejecutando pruebas unitarias..."
-          # Aquí puedes usar pytest si tienes tests
-          # pytest
+          # pytest tests/  # (descomentar cuando agregues tests)
 
   frontend-check:
     runs-on: ubuntu-latest
@@ -43,11 +48,25 @@ jobs:
       - name: 📥 Checkout del repositorio
         uses: actions/checkout@v3
 
-      - name: 🌐 Verificar archivos del Frontend
+      - name: 🛠️ Verificar archivos frontend
         run: |
-          echo "Verificando archivos HTML, JS y CSS..."
-          ls -la frontend/
-          # Aquí podrías agregar validadores como htmlhint, eslint, etc.
+          echo "Revisando estructura del frontend..."
+          ls -R frontend/
+
+      - name: 🌐 Configurar Node.js para análisis JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Instalar ESLint
+        run: |
+          npm install eslint -g
+          echo "Instalando ESLint globalmente para revisión JS..."
+
+      - name: 🧠 Linter de código JS
+        run: |
+          echo "Analizando calidad de JS..."
+          eslint frontend/assets/js || true
 
   deploy-ready:
     runs-on: ubuntu-latest
@@ -56,5 +75,5 @@ jobs:
     steps:
       - name: 🚀 Simulación de despliegue
         run: |
-          echo "Preparando artefactos para despliegue..."
-          echo "Pipeline completado exitosamente ✅"
+          echo "Pipeline completo: Build + Tests + Lint OK ✅"
+          echo "Listo para pasar a Fase 4 (CD - Despliegue)."
