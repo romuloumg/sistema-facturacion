@@ -1,18 +1,14 @@
-# app/db.py
 import os
 import mysql.connector
-from mysql.connector import pooling
-from .config import Config
 
-_connection_pool = pooling.MySQLConnectionPool(
-    pool_name="pool_sf",
-    pool_size=5,
-    host=Config.DB_HOST,
-    user=Config.DB_USER,
-    password=Config.DB_PASS,
-    database=Config.DB_NAME,
-    port=int(os.getenv("DB_PORT", 3306))
-)
+DB_CFG = {
+    "host": os.getenv("DB_HOST", "127.0.0.1"),
+    "user": os.getenv("DB_USER", "root"),
+    "password": os.getenv("DB_PASS", ""),
+    "database": os.getenv("DB_NAME", ""),
+    "port": int(os.getenv("DB_PORT", "3306")),
+}
 
 def get_conn():
-    return _connection_pool.get_connection()
+    print("🔌 Conectando a:", DB_CFG)  # <-- Línea temporal para debug
+    return mysql.connector.connect(**DB_CFG)
