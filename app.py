@@ -25,7 +25,7 @@ def _cors_preflight():
             resp.headers["Vary"] = "Origin"
         resp.headers["Access-Control-Allow-Headers"] = "Content-Type, X-User-Id, X-Role"
         resp.headers["Access-Control-Allow-Methods"] = "GET,POST,PATCH,DELETE,OPTIONS"
-        return resp  # ← corta aquí el preflight
+        return resp
 
 @app.after_request
 def _cors_headers(resp):
@@ -109,7 +109,6 @@ def role_required(*roles):
             u = get_request_user()
             if not u:
                 return jsonify({"error": "No autenticado"}), 401
-            # admin siempre puede
             if u["rol"] != "admin" and u["rol"] not in roles:
                 return jsonify({"error": "No autorizado", "rol": u["rol"]}), 403
             request.user = u
@@ -123,6 +122,11 @@ def role_required(*roles):
 @app.route("/")
 def alive():
     return "Backend Flask funcionando ✅"
+
+# Endpoint de salud para monitoreo
+@app.route("/api/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"}), 200
 
 # Productos: lectura (vendedor, supervisor, bodeguero, admin)
 @app.route("/api/productos", methods=["GET", "OPTIONS"])
@@ -443,4 +447,5 @@ def api_productos_public():
 # Main
 # ---------------------------
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", "5000")), debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)

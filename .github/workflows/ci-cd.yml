@@ -78,3 +78,5 @@ jobs:
         run: |
           echo "Pipeline completo: Build + Tests + Lint OK ✅"
           echo "Listo para pasar a Fase 4 (CD - Despliegue)."
+    
+
